@@ -1,0 +1,34 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "hyfn"
+  },
+  "servers": [
+    {
+      "url": "https://eaf2221b-446d-4907-8f99-314e441b38c3-00-2ndzo2ggoue2h.kirk.replit.dev/api/jobs/k17ewwr3aewr98c87pkf3w633d7qjvc2/jobTasks"
+    }
+  ],
+  "tags": [],
+  "paths": {
+    "/new-endpoint": {
+      "get": {
+        "summary": "New Endpoint",
+        "description": "This is your first endpoint! Edit this page to start documenting your API.",
+        "operationId": "get_new-endpoint",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {}
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
