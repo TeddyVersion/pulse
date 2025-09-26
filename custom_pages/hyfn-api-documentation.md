@@ -290,14 +290,3 @@ curl -X GET "https://.../api/agentLogs" \
 
 * Default cookie jar: **Default Jar**
 * Jar ID: `jar_efd62bcb0ff97c93326be7fde8635269c43c7fc0`
-
-***
-
-For further assistance or API-related queries, contact the **Hyfn support team**.
-
-```
-
-✅ Now it’s fully **structured, readable, and Markdown-compliant** — ready for documentation hosting (GitHub, Postman docs, or internal wiki).  
-
-Do you want me to also **add sample response bodies** (e.g., JSON outputs) for each endpoint, so developers know what to expect?
-```
