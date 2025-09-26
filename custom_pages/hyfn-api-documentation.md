@@ -3,8 +3,6 @@ title: Hyfn API Documentation
 fullscreen: false
 hidden: false
 ---
-<br />
-
 This document provides detailed information about the Hyfn API, including endpoints, request methods, headers, and example payloads. The API is organized into several collections: Agents, Jobs, JobTasks, JobLogs, and AgentLogs. Each section below describes the available endpoints, their purpose, and how to interact with them.
 
 ```markdown
