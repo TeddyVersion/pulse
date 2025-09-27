@@ -1,7 +1,7 @@
 ---
 title: Hyfn API Documentation V.0.2
 fullscreen: false
-hidden: false
+hidden: true
 ---
 <br />
 
