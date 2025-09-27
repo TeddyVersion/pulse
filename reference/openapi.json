@@ -1,0 +1,326 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hyfn API",
+    "version": "1.0.0",
+    "description": "This is the OpenAPI 3.0 specification for the Hyfn API. It includes endpoints for Agents, Jobs, JobTasks, JobLogs, and AgentLogs."
+  },
+  "servers": [
+    {
+      "url": "https://eaf2221b-446d-4907-8f99-314e441b38c3-00-2ndzo2ggoue2h.kirk.replit.dev/api"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "XAgentKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Agent-Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "XAgentKey": []
+    }
+  ],
+  "paths": {
+    "/agents/{agentId}/invoke": {
+      "post": {
+        "summary": "Invoke Agent",
+        "description": "Invokes an agent with a specific message.",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              },
+              "example": {
+                "message": "who are you?"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "response": "I am an AI agent here to help you."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "summary": "Get All Jobs",
+        "description": "Fetches all available jobs in the system.",
+        "responses": {
+          "200": {
+            "description": "List of jobs",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": "job123",
+                    "name": "Data Processing",
+                    "status": "running"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/jobTasks": {
+      "get": {
+        "summary": "Get All Job Tasks",
+        "description": "Retrieves all tasks associated with a specific job.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of job tasks",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": "task1",
+                    "description": "Step 1",
+                    "status": "done"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobLogs": {
+      "get": {
+        "summary": "Get All Job Logs",
+        "description": "Fetches all job logs in the system.",
+        "responses": {
+          "200": {
+            "description": "List of job logs",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": "log123",
+                    "status": "started",
+                    "jobId": "job123"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Log Item",
+        "description": "Creates a new log entry for a job.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobId": {
+                    "type": "string"
+                  },
+                  "input": {
+                    "type": "string"
+                  },
+                  "output": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "timeSpent": {
+                    "type": "integer"
+                  },
+                  "startedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "jobId",
+                  "status"
+                ]
+              },
+              "example": {
+                "jobId": "job123",
+                "input": "{}",
+                "output": "{}",
+                "status": "started",
+                "timeSpent": 0,
+                "startedAt": "2025-09-20T12:34:56Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Log created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "log123",
+                  "status": "started"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/jobLogs/{logId}": {
+      "put": {
+        "summary": "Update Log Item",
+        "description": "Updates a job log entry identified by logId.",
+        "parameters": [
+          {
+            "name": "logId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobId": {
+                    "type": "string"
+                  },
+                  "input": {
+                    "type": "string"
+                  },
+                  "output": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "timeSpent": {
+                    "type": "integer"
+                  },
+                  "startedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "jobId",
+                  "status"
+                ]
+              },
+              "example": {
+                "jobId": "job123",
+                "input": "{}",
+                "output": "{}",
+                "status": "completed",
+                "timeSpent": 1200,
+                "startedAt": "2025-09-20T12:34:56Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Log updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "log123",
+                  "status": "completed"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Log not found"
+          }
+        }
+      }
+    },
+    "/agentLogs": {
+      "get": {
+        "summary": "Get All Agent Logs",
+        "description": "Fetches all logs related to agents.",
+        "responses": {
+          "200": {
+            "description": "List of agent logs",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": "alog1",
+                    "agentId": "agent123",
+                    "status": "success"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
